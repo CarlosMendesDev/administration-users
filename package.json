@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "countapi-js": "^1.0.2",
+    "serverless-offline": "^8.3.1"
+  }
+}

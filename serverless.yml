@@ -1,0 +1,19 @@
+service: administration-users
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+
+functions:
+  getAcessNumber:
+    handler: analyzeAccess.getAcessNumber
+    events:
+      - http:
+          path: /get-acess
+          method: GET
+
+plugins:
+  - serverless-offline
