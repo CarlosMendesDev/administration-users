@@ -6,6 +6,11 @@ provider:
   name: aws
   runtime: nodejs12.x
   lambdaHashingVersion: 20201221
+  environment:
+    AWS_ACCESS_KEY_ID: AKIA26WDU3SB3RTPFMBE
+    AWS_SECRET_ACCESS_KEY: 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
+    REGION: us-east-1
+    API_VERSION: 2012-08-10
 
 functions:
   getAcessNumber:
@@ -19,6 +24,12 @@ functions:
     events:
       - http:
           path: /increment-acess
+          method: GET
+  getUserById:
+    handler: managementUsers.getUserById
+    events:
+      - http:
+          path: /get-user/{user_id}
           method: GET
 
 plugins:
