@@ -14,6 +14,12 @@ functions:
       - http:
           path: /get-acess
           method: GET
+  incrementAcessNumber:
+    handler: analyzeAccess.incrementAcessNumber
+    events:
+      - http:
+          path: /increment-acess
+          method: GET
 
 plugins:
   - serverless-offline
