@@ -47,24 +47,25 @@ async function createUser(event) {
   };
 };
 
-async function getUserById(event) {
-  const { user_id } = event.pathParameters;
+async function getUserByLogin(event) {
+  const { user_login } = event.pathParameters;
 
   const params = {
     TableName: 'users',
-    Key: { user_id },
+    Key: { user_login },
   };
 
   try {
     const data = await docClient.get(params).promise();
 
-    const { user_id, user_name } = data.Item; 
+    const { user_id, user_login, user_name } = data.Item; 
 
     return {
       statusCode: 200,
       body: JSON.stringify(
         {
           user_id,
+          user_login,
           user_name,
         },
         null,
@@ -73,10 +74,10 @@ async function getUserById(event) {
     };
   } catch (error) {
     return {
-      statusCode: 200,
+      statusCode: error.statusCode,
       body: JSON.stringify(error),
     };
   };
 };
 
-module.exports = { getUserById, createUser }
+module.exports = { getUserByLogin, createUser }

@@ -19,18 +19,21 @@ functions:
       - http:
           path: /get-acess
           method: GET
+
   incrementAcessNumber:
     handler: analyzeAccess.incrementAcessNumber
     events:
       - http:
           path: /increment-acess
           method: GET
-  getUserById:
-    handler: managementUsers.getUserById
+
+  getUserByLogin:
+    handler: managementUsers.getUserByLogin
     events:
       - http:
-          path: /get-user/{user_id}
+          path: /get-user/{user_login}
           method: GET
+
   createUser:
     handler: managementUsers.createUser
     events:
