@@ -1,7 +1,7 @@
 'use strict';
 const countapi = require('countapi-js');
 
-module.exports.getAcessNumber = async (event) => {
+async function getAcessNumber() {
   const namespace = 'ton.com.br';
 
   const data = await countapi.get(namespace, 'visits');
@@ -32,7 +32,7 @@ module.exports.getAcessNumber = async (event) => {
   }
 };
 
-module.exports.incrementAcessNumber = async (event) => {
+async function incrementAcessNumber() {
   const namespace = 'ton.com.br';
 
   const data = await countapi.hit(namespace, 'visits');
@@ -62,3 +62,5 @@ module.exports.incrementAcessNumber = async (event) => {
     };
   }
 };
+
+module.exports = { getAcessNumber, incrementAcessNumber }
