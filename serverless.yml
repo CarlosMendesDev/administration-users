@@ -31,6 +31,12 @@ functions:
       - http:
           path: /get-user/{user_id}
           method: GET
+  createUser:
+    handler: managementUsers.createUser
+    events:
+      - http:
+          path: /create-user
+          method: POST
 
 plugins:
   - serverless-offline

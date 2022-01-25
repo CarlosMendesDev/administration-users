@@ -1,4 +1,5 @@
 const AWS = require('aws-sdk');
+const UUID = require('uuid');
 
 AWS.config.correctClockSkew = true;
 
@@ -9,6 +10,42 @@ AWS.config.update({
 });
 
 const docClient = new AWS.DynamoDB.DocumentClient({ apiVersion: process.env.API_VERSION });
+
+async function createUser(event) {
+  const requestBody = JSON.parse(event.body);
+
+  const { user_name, user_login, user_password } = requestBody;
+
+  const params = {
+    TableName: 'users',
+    Item: {
+      'user_id': UUID.v4(),
+      'user_name': user_name,
+      'user_login': user_login,
+      'user_password': user_password,
+    },
+  };
+
+  try {
+    await docClient.put(params).promise();
+
+    return {
+      statusCode: 201,
+      body: JSON.stringify(
+        {
+          message: 'Usuário cadastrado com sucesso.',
+        },
+        null,
+        2
+      ),
+    };
+  } catch (error) {
+    return {
+      statusCode: error.statusCode,
+      body: JSON.stringify(error),
+    };
+  };
+};
 
 async function getUserById(event) {
   const { user_id } = event.pathParameters;
@@ -42,4 +79,4 @@ async function getUserById(event) {
   };
 };
 
-module.exports = { getUserById }
+module.exports = { getUserById, createUser }
