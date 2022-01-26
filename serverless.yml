@@ -1,3 +1,5 @@
+org: carlosmendesdev
+app: administration-users
 service: administration-users
 
 frameworkVersion: '2'
