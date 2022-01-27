@@ -9,6 +9,19 @@ provider:
   #   AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
   #   AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
   #   AWS_REGION: us-REGION-1
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:DescribeTable
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: 'arn:aws:dynamodb:us-east-1:*:*'
 
 functions:
   getAcessNumber:
